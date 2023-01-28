@@ -1,0 +1,26 @@
+{
+  "name": "oscar-jane.com",
+  "version": "1.0.0",
+  "description": "My personal website",
+  "author": {
+    "name": "Oscar Jané",
+    "email": "hello@oscar-jane.com",
+    "url": "https://oscar-jane.com/"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oscargjane/portfolio-oscar-jane.git"
+  },
+  "dependencies": {
+    "next": "^13.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
