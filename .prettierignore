@@ -1,0 +1,6 @@
+.vscode
+.next
+.vercel
+.husky
+package-lock.json
+public
