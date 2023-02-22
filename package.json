@@ -23,6 +23,7 @@
   "dependencies": {
     "@next/font": "^13.1.6",
     "@next/swc-darwin-x64": "^13.1.6",
+    "clsx": "^1.2.1",
     "next": "^13.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
