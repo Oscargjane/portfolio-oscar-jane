@@ -13,5 +13,5 @@ module.exports = {
     // adds hover effects only on supported devices
     hoverOnlyWhenSupported: true,
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };

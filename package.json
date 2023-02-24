@@ -24,11 +24,13 @@
     "@next/font": "^13.1.6",
     "@next/swc-darwin-x64": "^13.1.6",
     "clsx": "^1.2.1",
+    "framer-motion": "^9.0.7",
     "next": "^13.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.13",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.6",
