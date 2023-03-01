@@ -31,5 +31,3 @@ export default function HomePage() {
     </section>
   );
 }
-
-// I'm a student of the Master in Full-Stack Development at Nuclio Digital School.
