@@ -23,6 +23,7 @@
   "dependencies": {
     "@next/font": "^13.1.6",
     "@next/swc-darwin-x64": "^13.1.6",
+    "@sendgrid/mail": "^7.7.0",
     "clsx": "^1.2.1",
     "framer-motion": "^9.0.7",
     "next": "^13.1.6",
