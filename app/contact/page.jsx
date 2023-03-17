@@ -1,23 +1,36 @@
 'use client';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import clsx from 'clsx';
 
 export default function ContactPage() {
-  async function handleOnSubmit(e) {
-    e.preventDefault();
+  const formik = useFormik({
+    initialValues: {
+      fullName: '',
+      emailAddress: '',
+      subjectMessage: '',
+      message: '',
+    },
 
-    const formData = {};
+    validationSchema: Yup.object({
+      fullName: Yup.string().trim().min(2, '').required('Name is required'),
+      emailAddress: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+      subjectMessage: Yup.string().required('Message subject is required'),
+      message: Yup.string()
+        .max(250, 'Message must be 250 characters or less')
+        .required('Message is required'),
+    }),
 
-    Array.from(e.currentTarget.elements).forEach((field) => {
-      if (!field.name) return;
-      formData[field.name] = field.value;
-    });
-
-    await fetch('/api/mail', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-    });
-
-    return formData;
-  }
+    onSubmit: async (formData) => {
+      console.log(formData);
+      await fetch('/api/mail', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+      });
+    },
+  });
 
   return (
     <section>
@@ -26,50 +39,132 @@ export default function ContactPage() {
         Have a project, idea or opportunity you&apos;d like to discuss? Or just
         want to connect?
       </p>
-      <form method="POST" onSubmit={handleOnSubmit}>
+      <form method="POST" onSubmit={formik.handleSubmit}>
         <div className="flex flex-col gap-5 mt-12 text-base">
           <div className="flex gap-5">
-            <label className="basis-1/2 flex flex-col font-medium text-neutral-500 focus-within:text-neutral-800 transition-all">
-              Name
+            <label
+              className={clsx(
+                'basis-1/2 flex flex-col font-medium text-neutral-500 focus-within:text-neutral-800 transition-all',
+                {
+                  'text-red-500 focus-within:text-red-500':
+                    formik.touched.fullName && formik.errors.fullName,
+                }
+              )}
+            >
+              {formik.touched.fullName && formik.errors.fullName
+                ? formik.errors.fullName
+                : 'Name'}
               <input
+                id="fullName"
                 type="text"
-                name="fullName"
+                value={formik.values.fullName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 placeholder="Your entire name"
-                className="max-h-12 mt-1 p-4 text-sm text-neutral-800 border border-neutral-500 rounded-lg focus:outline-none focus:ring-0 focus:ring-neutral-500 transition-all"
+                autoComplete="off"
+                className={clsx(
+                  'max-h-12 mt-1 p-4 text-sm text-neutral-800 border border-neutral-500 rounded-lg focus:outline-none focus:ring-0 focus:ring-neutral-500 transition-all',
+                  {
+                    'border-red-500 focus:ring-red-500':
+                      formik.touched.fullName && formik.errors.fullName,
+                  }
+                )}
               />
             </label>
-            <label className="basis-1/2 flex flex-col font-medium text-neutral-500 focus-within:text-neutral-800 transition-all">
-              Email
+            <label
+              className={clsx(
+                'basis-1/2 flex flex-col font-medium text-neutral-500 focus-within:text-neutral-800 transition-all',
+                {
+                  'text-red-500 focus-within:text-red-500':
+                    formik.touched.emailAddress && formik.errors.emailAddress,
+                }
+              )}
+            >
+              {formik.touched.emailAddress && formik.errors.emailAddress
+                ? formik.errors.emailAddress
+                : 'Email'}
               <input
+                id="emailAddress"
                 type="email"
-                name="emailAddress"
+                value={formik.values.emailAddress}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 placeholder="Your email address"
-                className="max-h-12 mt-1 p-4 text-sm text-neutral-800 border border-neutral-500 rounded-lg focus:outline-none focus:ring-0 focus:ring-neutral-500 transition-all"
+                autoComplete="off"
+                className={clsx(
+                  'max-h-12 mt-1 p-4 text-sm text-neutral-800 border border-neutral-500 rounded-lg focus:outline-none focus:ring-0 focus:ring-neutral-500 transition-all',
+                  {
+                    'border-red-500 focus:ring-red-500':
+                      formik.touched.emailAddress && formik.errors.emailAddress,
+                  }
+                )}
               />
             </label>
           </div>
-          <label className="basis-1/2 flex flex-col font-medium text-neutral-500 focus-within:text-neutral-800 transition-all">
-            Subject
+          <label
+            className={clsx(
+              'basis-1/2 flex flex-col font-medium text-neutral-500 focus-within:text-neutral-800 transition-all',
+              {
+                'text-red-500 focus-within:text-red-500':
+                  formik.touched.subjectMessage && formik.errors.subjectMessage,
+              }
+            )}
+          >
+            {formik.touched.subjectMessage && formik.errors.subjectMessage
+              ? formik.errors.subjectMessage
+              : 'Subject'}
             <input
+              id="subjectMessage"
               type="text"
-              name="subject"
+              value={formik.values.subjectMessage}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="Subject"
-              className="max-h-12 mt-1 p-4 text-sm text-neutral-800 border border-neutral-500 rounded-lg focus:outline-none focus:ring-0 focus:ring-neutral-500 transition-all"
+              autoComplete="off"
+              className={clsx(
+                'max-h-12 mt-1 p-4 text-sm text-neutral-800 border border-neutral-500 rounded-lg focus:outline-none focus:ring-0 focus:ring-neutral-500 transition-all',
+                {
+                  'border-red-500 focus:ring-red-500':
+                    formik.touched.subjectMessage &&
+                    formik.errors.subjectMessage,
+                }
+              )}
             />
           </label>
-          <label className="flex flex-col font-medium text-neutral-500 focus-within:text-neutral-800 transition-all">
-            Message
+          <label
+            className={clsx(
+              'flex flex-col font-medium text-neutral-500 focus-within:text-neutral-800 transition-all',
+              {
+                'text-red-500 focus-within:text-red-500':
+                  formik.touched.message && formik.errors.message,
+              }
+            )}
+          >
+            {formik.touched.message && formik.errors.message
+              ? formik.errors.message
+              : 'Message'}
             <textarea
-              name="message"
+              id="message"
+              value={formik.values.message}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder="Your message..."
-              required
+              autoComplete="off"
               rows="10"
-              className="max-h-48 mt-1 p-4 rounded-lg border border-neutral-500 focus:outline-none focus:ring-0 focus:ring-neutral-500 transition-all"
+              className={clsx(
+                'max-h-48 mt-1 p-4 rounded-lg border border-neutral-500 focus:outline-none focus:ring-0 focus:ring-neutral-500 transition-all',
+                {
+                  'border-red-500 focus:ring-red-500':
+                    formik.touched.message && formik.errors.message,
+                }
+              )}
             />
           </label>
           <button
             type="submit"
+            // disabled={!formIsValid}
             className="w-1/3 mt-5 px-2.5 py-3.5 self-center rounded-lg text-white bg-neutral-800 cursor-pointer"
+            // className={clsx('w-1/3 mt-5 px-2.5 py-3.5 self-center rounded-lg text-white bg-neutral-800 cursor-pointer', {'bg-neutral-500 opacity-50 cursor-not-allowed': !formIsValid})}
           >
             Send
           </button>
