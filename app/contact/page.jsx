@@ -1,9 +1,25 @@
 'use client';
+import { useCallback } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 
 export default function ContactPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name, value) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   const formik = useFormik({
     initialValues: {
       fullName: '',
@@ -24,11 +40,14 @@ export default function ContactPage() {
     }),
 
     onSubmit: async (formData) => {
-      console.log(formData);
       await fetch('/api/mail', {
         method: 'POST',
         body: JSON.stringify(formData),
       });
+
+      router.push(
+        '/success' + '?' + createQueryString('name', `${formData.fullName}`)
+      );
     },
   });
 
@@ -160,14 +179,13 @@ export default function ContactPage() {
               )}
             />
           </label>
-          <button
+          <motion.button
             type="submit"
-            // disabled={!formIsValid}
             className="w-1/3 mt-5 px-2.5 py-3.5 self-center rounded-lg text-white bg-neutral-800 cursor-pointer"
-            // className={clsx('w-1/3 mt-5 px-2.5 py-3.5 self-center rounded-lg text-white bg-neutral-800 cursor-pointer', {'bg-neutral-500 opacity-50 cursor-not-allowed': !formIsValid})}
+            whileHover={{ scale: 1.1 }}
           >
             Send
-          </button>
+          </motion.button>
         </div>
       </form>
     </section>
