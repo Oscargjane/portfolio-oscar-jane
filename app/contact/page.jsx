@@ -6,6 +6,10 @@ import * as Yup from 'yup';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
+export const metadata = {
+  title: 'Contact',
+};
+
 export default function ContactPage() {
   const router = useRouter();
   const searchParams = useSearchParams();

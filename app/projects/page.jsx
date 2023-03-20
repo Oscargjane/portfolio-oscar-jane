@@ -1,5 +1,9 @@
 import clsx from 'clsx';
 
+export const metadata = {
+  title: 'Projects',
+};
+
 export default async function ProjectsPage() {
   const projectItem = {
     'password-generator': {

@@ -1,7 +1,8 @@
-import '@/styles/globals.css';
 import localFont from '@next/font/local';
-import clsx from 'clsx';
+// import { Metadata } from 'next';
 import Navigation from '@/components/navigation';
+import clsx from 'clsx';
+import '@/styles/globals.css';
 
 const spaceGrotesk = localFont({
   src: '../public/fonts/SpaceGrotesk-latin-var.woff2',
@@ -9,6 +10,29 @@ const spaceGrotesk = localFont({
   variable: '--font-spaceGrotesk',
   display: 'swap',
 });
+
+export const metadata = {
+  title: {
+    default: 'Oscar Jané',
+    template: '%s | Oscar Jané',
+  },
+  description: 'Self-taught frontend developer.',
+  openGraph: {
+    title: 'Oscar Jané',
+    description: 'Self-taught frontend developer.',
+    url: 'https://oscar-jane.com',
+    siteName: 'Oscar Jané',
+    // images: [
+    //   {
+    //     url: '',
+    //     width: ,
+    //     height: ,
+    //   },
+    // ],
+    locale: 'en-US',
+    type: 'website',
+  },
+};
 
 export default function RootLayout({ children }) {
   return (

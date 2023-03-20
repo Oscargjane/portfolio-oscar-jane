@@ -5,6 +5,10 @@ import {
   ArrowIcon,
 } from '@/components/icons';
 
+export const metadata = {
+  title: 'About',
+};
+
 export default function AboutPage() {
   const socialLinks = {
     twitter: {
