@@ -5,7 +5,7 @@ export default async function ProjectsPage() {
     'password-generator': {
       name: 'Password Generator',
       overview:
-        'A small random password generator application was created to get my hands dirty with a bit of React and practice fundamental front-end development skills.',
+        'Small random password generator application, created with the goal of getting my hands dirty with React.',
       tags: ['reactjs', 'styled-components', 'vite', 'netlify'],
       url: 'https://github.com/Oscargjane/password-generator-app',
     },
@@ -21,8 +21,8 @@ export default async function ProjectsPage() {
     <section>
       <h1 className="font-bold text-3xl">Projects</h1>
       <p className="my-5">
-        I am constantly improving myself and my skills, these are some of the
-        personal projects I have done:
+        I am constantly seeking to acquire new skills and develop myself both
+        personally and professionally. Here are some of my personal projects.
       </p>
       <div className="w-screen mt-12 ml-[-50%] flex gap-5 justify-center">
         {Object.entries(projectItem).map(

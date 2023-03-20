@@ -55,8 +55,8 @@ export default function ContactPage() {
     <section>
       <h1 className="font-bold text-3xl">Contact Me</h1>
       <p className="my-5">
-        Have a project, idea or opportunity you&apos;d like to discuss? Or just
-        want to connect?
+        Do you have any project, idea, or opportunity that you would like to
+        discuss or simply connect? Leave your message in the following form.
       </p>
       <form method="POST" onSubmit={formik.handleSubmit}>
         <div className="flex flex-col gap-5 mt-12 text-base">
