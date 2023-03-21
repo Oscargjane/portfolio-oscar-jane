@@ -69,24 +69,24 @@ export default function Navigation() {
               stiffness: 350,
               damping: 30,
             }}
-          />
+          >
+            {Object.entries(navItems).map(([path, { name }]) => {
+              const isActive = path === pathname;
+              return (
+                <Link
+                  className={clsx(
+                    'px-[10px] py-[5px] transition-all text-neutral-500 hover:text-neutral-800',
+                    { 'text-neutral-800': isActive }
+                  )}
+                  key={path}
+                  href={path}
+                >
+                  {name}
+                </Link>
+              );
+            })}
+          </motion.li>
         ) : null}
-
-        {Object.entries(navItems).map(([path, { name }]) => {
-          const isActive = path === pathname;
-          return (
-            <Link
-              className={clsx(
-                'px-[10px] py-[5px] transition-all text-neutral-500 hover:text-neutral-800',
-                { 'text-neutral-800': isActive }
-              )}
-              key={path}
-              href={path}
-            >
-              {name}
-            </Link>
-          );
-        })}
       </ul>
     </nav>
   );
