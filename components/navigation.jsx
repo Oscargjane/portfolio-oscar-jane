@@ -56,7 +56,7 @@ export default function Navigation() {
       <Logo />
       <ul className="font-medium flex">
         {navItems[pathname] ? (
-          <motion.div
+          <motion.li
             className="absolute bg-neutral-100 h-[41px] rounded-md z-[-1]"
             initial={{ opacity: 0, x: navItems[pathname].x }}
             animate={{
