@@ -5,15 +5,14 @@ const NEXT_SSG_FILES = [
   '/*_middlewareManifest.js$',
   '/*_ssgManifest.js$',
   '/*.js$',
+  '/*.mjs$',
+  '/pages/api/**.js$'
 ];
-
-const exclude = ['/app/success/*'];
 
 /** @type {import('next-sitemap').IConfig} */
 export const config = {
   siteUrl: SITE_URL,
   generateRobotsTxt: true,
-  exclude,
   robotsTxtOptions: {
     policies: [
       {

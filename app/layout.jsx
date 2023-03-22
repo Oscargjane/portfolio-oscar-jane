@@ -16,6 +16,17 @@ export const metadata = {
     default: 'Oscar Jané',
     template: '%s | Oscar Jané',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   description: 'Self-taught frontend developer.',
   openGraph: {
     title: 'Oscar Jané',
@@ -31,6 +42,9 @@ export const metadata = {
     // ],
     locale: 'en-US',
     type: 'website',
+  },
+  verification: {
+    google: 'RBQz3PejJ83vngDsi7I1uHIB9GHlqaR1atUcOgdY6G8',
   },
 };
 
