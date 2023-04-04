@@ -64,7 +64,7 @@ export default function ContactPage() {
       </p>
       <form method="POST" onSubmit={formik.handleSubmit}>
         <div className="flex flex-col gap-5 mt-12 text-base">
-          <div className="flex gap-5">
+          <div className="flex flex-col lg:flex-row gap-5">
             <label
               className={clsx(
                 'basis-1/2 flex flex-col font-medium text-neutral-500 focus-within:text-neutral-800 transition-all',
@@ -185,7 +185,7 @@ export default function ContactPage() {
           </label>
           <motion.button
             type="submit"
-            className="w-1/3 mt-5 px-2.5 py-3.5 self-center rounded-lg text-white bg-neutral-800 cursor-pointer"
+            className="w-full lg:w-1/3 mt-5 px-2.5 py-3.5 self-center rounded-lg text-white bg-neutral-800 cursor-pointer"
             whileHover={{ scale: 1.1 }}
           >
             Send
