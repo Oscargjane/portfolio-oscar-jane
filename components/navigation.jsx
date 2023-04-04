@@ -1,25 +1,21 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
+import { BarsIcon, XMarkIcon } from '@/components/icons';
 
 const navItems = {
   '/': {
     name: 'home',
-    x: 0,
-    w: '68px',
   },
   '/about': {
     name: 'about',
-    x: 68,
-    w: '72px',
   },
   '/projects': {
     name: 'projects',
-    x: 140,
-    w: '93px',
   },
 };
 
@@ -50,42 +46,71 @@ function Logo() {
 }
 
 export default function Navigation() {
+  const [isToggle, setIsToggle] = useState(false);
   const pathname = usePathname();
+
+  const handleClickMobileNav = () => {
+    setIsToggle(!isToggle);
+  };
+
   return (
-    <nav className="flex items-center justify-between pt-8">
-      <Logo />
-      <ul className="font-medium flex">
-        {navItems[pathname] ? (
+    <LayoutGroup>
+      <nav className="flex flex-wrap items-center justify-between">
+        <Logo />
+        <button
+          className="lg:hidden focus:outline-none"
+          onClick={handleClickMobileNav}
+        >
           <motion.div
-            className="absolute bg-neutral-100 h-[41px] rounded-md z-[-1]"
-            initial={{ opacity: 0, x: navItems[pathname].x }}
-            animate={{
-              opacity: 1,
-              x: navItems[pathname].x,
-              width: navItems[pathname].w,
-            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{
               type: 'spring',
               stiffness: 350,
               damping: 30,
             }}
-          />
-        ) : null}
-        {Object.entries(navItems).map(([path, { name }]) => {
-          const isActive = path === pathname;
-          return (
-            <li
-              key={path}
-              className={clsx(
-                'px-[10px] py-[5px] transition-all text-neutral-500 hover:text-neutral-800',
-                { 'text-neutral-800': isActive }
-              )}
-            >
-              <Link href={path}>{name}</Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+          >
+            {isToggle ? <XMarkIcon /> : <BarsIcon />}
+          </motion.div>
+        </button>
+        <div
+          className={clsx(
+            'w-full lg:w-min lg:flex',
+            { block: isToggle },
+            { hidden: !isToggle }
+          )}
+        >
+          <ul className="flex flex-col items-center font-medium lg:flex-row">
+            {Object.entries(navItems).map(([path, { name }]) => {
+              const isActive = path === pathname;
+              return (
+                <li
+                  key={path}
+                  className={clsx(
+                    'transition-all relative px-[10px] py-[5px] flex align-middle text-neutral-500 hover:text-neutral-800',
+                    { 'text-neutral-800': isActive }
+                  )}
+                >
+                  <Link href={path}>
+                    {name}
+                    {path === pathname ? (
+                      <motion.div
+                        className="absolute inset-0 bg-neutral-100 rounded-md z-[-1]"
+                        layoutId="navigation"
+                        transition={{
+                          type: 'spring',
+                          stiffness: 350,
+                          damping: 30,
+                        }}
+                      />
+                    ) : null}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </nav>
+    </LayoutGroup>
   );
 }

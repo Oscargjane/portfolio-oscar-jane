@@ -1,5 +1,4 @@
 import localFont from '@next/font/local';
-// import { Metadata } from 'next';
 import Navigation from '@/components/navigation';
 import clsx from 'clsx';
 import '@/styles/globals.css';
@@ -54,9 +53,9 @@ export default function RootLayout({ children }) {
       lang="en"
       className={clsx('text-lg text-neutral-900', spaceGrotesk.variable)}
     >
-      <body className="antialiased h-full mx-auto w-1/2 mb-32">
+      <body className="antialiased md:w-3/4 lg:w-1/2 mx-4 mt-8 mb-32 md:mx-auto">
         <Navigation />
-        <main className="mt-24">{children}</main>
+        <main className="mt-6 md:mt-10 lg:mt-24">{children}</main>
       </body>
     </html>
   );
