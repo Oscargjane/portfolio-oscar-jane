@@ -3,6 +3,7 @@ import {
   GitHubIcon,
   LinkedinIcon,
   ArrowIcon,
+  FileIcon,
 } from '@/components/icons';
 
 export const metadata = {
@@ -22,6 +23,10 @@ export default function AboutPage() {
     linkedin: {
       name: 'Linkedin',
       link: 'https://www.linkedin.com/in/oscar-jane-frontend-developer/?locale=en_US',
+    },
+    curriculum: {
+      name: 'CV',
+      link: '/curriculum.pdf',
     },
   };
   return (
@@ -68,10 +73,10 @@ export default function AboutPage() {
           good natural wine.
         </p>
       </div>
-      <ul className="flex gap-2 items-center mt-8">
+      <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 mt-8">
         {Object.entries(socialLinks).map(([id, { name, link }]) => {
           return (
-            <li className="w-full" key={id}>
+            <li key={id}>
               <a
                 href={link}
                 target="_blank"
@@ -83,8 +88,10 @@ export default function AboutPage() {
                     <TwitterIcon />
                   ) : name === 'GitHub' ? (
                     <GitHubIcon />
-                  ) : (
+                  ) : name === 'Linkedin' ? (
                     <LinkedinIcon />
+                  ) : (
+                    <FileIcon />
                   )}
                   <p className="ml-3">{name}</p>
                 </div>
