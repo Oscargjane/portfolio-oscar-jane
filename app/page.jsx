@@ -8,7 +8,7 @@ export default function HomePage() {
       <h1 className="font-bold text-4xl">{greeting}</h1>
       <p className="max-w-lg my-5">{about()}</p>
       <p className="max-w-xl my-5">{bio()}</p>
-      <ul className="flex mt-8 space-x-6 font-sm text-neutral-500">
+      <ul className="flex flex-col md:flex-row mt-8 space-x-0 md:space-x-6 space-y-2 md:space-y-0 font-sm text-neutral-500">
         <li>
           <Link
             className="transition-all flex items-center hover:text-neutral-700"
